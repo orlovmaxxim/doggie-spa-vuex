@@ -1,4 +1,5 @@
 import axios from 'axios'
+import router from '../src/router'
 
 const commonUrl = `https://dog.ceo/api/`
 
@@ -34,8 +35,8 @@ export default {
           cb(res)
         }
       })
-      .catch((err) => {
-        return Promise.reject(err)
+      .catch(() => {
+        router.push('NotFound')
       })
   }
 }

@@ -11,9 +11,18 @@ export default new Router({
   // mode: 'history',
   routes: [
     {
+      path: '*',
+      redirect: '/NotFound'
+    },
+    {
       path: '/',
       name: 'Home',
       component: () => import('@/pages/Home')
+    },
+    {
+      path: '/NotFound',
+      name: 'NotFound',
+      component: () => import('@/pages/NotFound')
     },
     {
       name: 'favourites',

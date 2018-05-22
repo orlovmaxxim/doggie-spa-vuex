@@ -5,11 +5,13 @@
       Choose Breed
       <span class="caret"></span>
     </button>
-    <ul id="dropdown-menu" class="open" v-if="showDropDown">
-      <li v-for="doggie in doggies" class="list" :key="doggie.id">
-        <router-link class="link dd-link" :to="{ name: 'Breed', params: { breed: doggie }}">{{doggie}}</router-link>
-      </li>
-    </ul>
+    <transition name="fade">
+      <ul id="dropdown-menu" v-if="showDropDown">
+        <li v-for="doggie in doggies" class="list" :key="doggie.id">
+          <router-link class="link dd-link" :to="{ name: 'Breed', params: { breed: doggie }}">{{doggie}}</router-link>
+        </li>
+      </ul>
+    </transition>
   </div>
 </template>
 
@@ -100,10 +102,7 @@ button:hover {
   padding: 0;
   width: 180px;
   height: 250px;
-  visibility: hidden;
-  opacity: 0;
   overflow-y: scroll;
-  /* @include transition(all 500ms); */
 }
 
   #dropdown-menu.open {
@@ -124,5 +123,12 @@ button:hover {
     padding: 10px;
     color: #000;
     text-decoration: none;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .3s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
   }
 </style>

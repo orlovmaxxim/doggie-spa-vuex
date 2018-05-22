@@ -39,11 +39,9 @@ export default {
     this.scroll()
   },
   created () {
-    console.log(this.$attrs)
     this.$store.dispatch('getBreedPics', this.$attrs)
   },
   updated () {
-    console.log(this.$attrs)
     this.$store.dispatch('getBreedPics', this.$attrs)
   }
 }

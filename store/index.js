@@ -62,7 +62,6 @@ const store = new Vuex.Store({
     },
     getAllDoggiesPic ({ commit, state }) {
       const arrOfRequests = state.doggiesList.map((breed) => {
-        // return axios.get(`https://dog.ceo/api/breed/${breed}/images`)
         return api.getAllDoggiesPic(breed)
       })
       Promise.all(arrOfRequests)

@@ -28,4 +28,8 @@ export default {
     margin: 0;
     padding: 0;
   }
+
+  .menu__item .link:hover {
+    color: #073b23
+  }
 </style>
