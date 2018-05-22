@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import api from './api'
 import axios from 'axios'
 import * as types from './mutation-types'
+import router from '../src/router'
 
 Vue.use(Vuex)
 
@@ -70,6 +71,9 @@ const store = new Vuex.Store({
         }))
     },
     getBreedPics ({ commit, state }, { breed }) {
+      if (!state.doggiesList.includes(breed)) {
+        return router.push('NotFound')
+      }
       api.getBreedPics(state, breed, (res) => {
         commit(types.GET_BREED_PICS, res)
       })

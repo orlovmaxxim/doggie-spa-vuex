@@ -46,20 +46,10 @@ export default {
 </script>
 
 <style>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #1b6342;
-}
+  h1, h2 {
+    font-weight: normal;
+  }
+  a {
+    color: #1b6342;
+  }
 </style>

@@ -23,7 +23,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+
+  a {
+    color: #1b6342;
+  }
+
   .menu {
     margin: 0;
     padding: 0;
