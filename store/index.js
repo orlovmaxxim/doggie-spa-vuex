@@ -27,19 +27,15 @@ const store = new Vuex.Store({
     },
     [types.GET_FULL_DOGGIE_LIST] (state, { data }) {
       let doggieArr = []
-      // console.log(data.message)
       for (const prop in data.message) {
-        // console.log(data.message[prop])
         if (data.message[prop].length) {
           data.message[prop].map((val, i) => {
-            // console.log(prop, val)
-            // doggieArr = [...doggieArr, `${prop} ${val}`]
+            doggieArr = [...doggieArr, `${prop} ${val}`]
           })
         } else {
           doggieArr = [...doggieArr, prop]
         }
       }
-      // const doggieNamesArr =
       state.doggiesList = doggieArr
     },
     [types.GET_DOGGIE_PICS] (state, data) {
