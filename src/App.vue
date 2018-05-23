@@ -23,9 +23,9 @@ export default {
   beforeCreate () {
     this.$store.commit(types.INIT_LIKED_DOGGIES)
   },
-  // created () {
-  //   this.$store.dispatch('getAllDoggies')
-  // }
+  created () {
+    console.log(this.$store.state.doggiesList)
+  },
   computed: {
     ...mapGetters({
       doggies: 'getDoggies'

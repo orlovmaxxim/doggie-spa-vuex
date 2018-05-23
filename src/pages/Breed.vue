@@ -7,9 +7,8 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import Doggies from '../components/Doggies'
-import router from '../router'
 
 export default {
   name: 'favourites',
@@ -37,8 +36,8 @@ export default {
     '$route': 'fetchData'
   },
   methods: {
-    fetchData() {
-      this.$nextTick (() => {
+    fetchData () {
+      this.$nextTick(() => {
         this.$store.dispatch('getBreedPics', this.$attrs)
       })
     },
