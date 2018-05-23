@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ this.$route.params.breed.toUpperCase() }}</h1>
+    <h1>{{getCurrentBreed}}</h1>
     <doggies :breed="true" :load-limit=loadLimit></doggies>
   </div>
 </template>
@@ -21,9 +21,13 @@ export default {
     Doggies
   },
   computed: {
+    breed: function () {
+      return this.$route.params.breed.toUpperCase()
+    },
     ...mapGetters({
       breedPics: 'getBreed',
-      doggiesList: 'getDoggies'
+      doggiesList: 'getDoggies',
+      getCurrentBreed: 'getCurBreed'
     })
   },
   mounted () {

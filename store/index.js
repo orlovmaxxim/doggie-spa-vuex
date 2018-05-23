@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import api from './api'
 import axios from 'axios'
 import * as types from './mutation-types'
+import router from '../src/router'
 
 Vue.use(Vuex)
 
@@ -11,13 +12,15 @@ const store = new Vuex.Store({
     doggiesList: [],
     doggiesPictures: [],
     breedPics: [],
-    likedDoggies: []
+    likedDoggies: [],
+    breed: ''
   },
   getters: {
     getDoggies: state => state.doggiesList,
     getDoggiesPictures: state => state.doggiesPictures,
     getBreed: state => state.breedPics,
-    getLiked: state => state.likedDoggies
+    getLiked: state => state.likedDoggies,
+    getCurBreed: state => state.breed
   },
   mutations: {
     [types.INIT_LIKED_DOGGIES] (state) {
@@ -54,6 +57,9 @@ const store = new Vuex.Store({
     },
     [types.DEL_BREDD_PICS] (state) {
       state.breedPics = []
+    },
+    [types.SET_CURRENT_BREED] (state, breed) {
+      state.breed = breed
     }
   },
   actions: {
@@ -65,7 +71,7 @@ const store = new Vuex.Store({
         })
       }
     },
-    getFullBreedsList ({ commit, state }) {
+    getFullBreedsList ({ commit, state }, routeParams) {
       if (!state.doggiesList.length) {
         api.getDoggies(state, (res) => {
           commit(types.GET_FULL_DOGGIE_LIST, res)
@@ -83,8 +89,12 @@ const store = new Vuex.Store({
     },
     getBreedPics ({ commit, state, dispatch }, breed) {
       api.getBreedPics(state, breed, (res) => {
+        if (!state.doggiesList.includes(breed)) {
+          return router.push('NotFound')
+        }
         commit(types.DEL_BREDD_PICS)
         commit(types.GET_BREED_PICS, res)
+        commit(types.SET_CURRENT_BREED, breed)
       })
     }
   }

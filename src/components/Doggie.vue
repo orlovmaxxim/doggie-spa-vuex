@@ -61,8 +61,6 @@ export default {
 
 <style>
   .doggie__pic {
-    /* max-width: 100%;
-    vertical-align: bottom; */
     border-radius: 20px;
     width: 200px;
     height: 200px;
