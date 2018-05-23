@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <ul class="doggie__list grid">
       <li class="doggie__element" v-for="dogPic in doggiesPics.slice(0, loadLimit)" :key="dogPic.id" v-if="!breed">
         <doggie :dogPic=dogPic></doggie>

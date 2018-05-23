@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import api from './api'
 import axios from 'axios'
 import * as types from './mutation-types'
-import router from '../src/router'
 
 Vue.use(Vuex)
 
@@ -52,14 +51,26 @@ const store = new Vuex.Store({
     },
     [types.GET_BREED_PICS] (state, { data }) {
       state.breedPics = data.message
+    },
+    [types.DEL_BREDD_PICS] (state) {
+      state.breedPics = []
     }
   },
   actions: {
     getAllDoggies ({ commit, state, dispatch }) {
-      api.getDoggies(state, (res) => {
-        commit(types.GET_FULL_DOGGIE_LIST, res)
-        dispatch('getAllDoggiesPic')
-      })
+      if (!state.doggiesList.length) {
+        api.getDoggies(state, (res) => {
+          commit(types.GET_FULL_DOGGIE_LIST, res)
+          dispatch('getAllDoggiesPic')
+        })
+      }
+    },
+    getFullBreedsList ({ commit, state }) {
+      if (!state.doggiesList.length) {
+        api.getDoggies(state, (res) => {
+          commit(types.GET_FULL_DOGGIE_LIST, res)
+        })
+      }
     },
     getAllDoggiesPic ({ commit, state }) {
       const arrOfRequests = state.doggiesList.map((breed) => {
@@ -70,11 +81,9 @@ const store = new Vuex.Store({
           commit(types.GET_DOGGIE_PICS, args)
         }))
     },
-    getBreedPics ({ commit, state }, { breed }) {
-      if (!state.doggiesList.includes(breed)) {
-        return router.push('NotFound')
-      }
+    getBreedPics ({ commit, state, dispatch }, { breed }) {
       api.getBreedPics(state, breed, (res) => {
+        commit(types.DEL_BREDD_PICS)
         commit(types.GET_BREED_PICS, res)
       })
     }

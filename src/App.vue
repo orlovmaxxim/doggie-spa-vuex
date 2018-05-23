@@ -23,9 +23,9 @@ export default {
   beforeCreate () {
     this.$store.commit(types.INIT_LIKED_DOGGIES)
   },
-  created () {
-    this.$store.dispatch('getAllDoggies')
-  },
+  // created () {
+  //   this.$store.dispatch('getAllDoggies')
+  // }
   computed: {
     ...mapGetters({
       doggies: 'getDoggies'
@@ -60,6 +60,11 @@ ul {
 li {
   display: inline-block;
   margin: 0 10px;
+}
+
+.container {
+  width: 960px;
+  margin: 0 auto;
 }
 
 #app {

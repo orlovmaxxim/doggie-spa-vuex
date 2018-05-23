@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import Doggies from '../components/Doggies'
 import router from '../router'
 
@@ -27,7 +27,21 @@ export default {
       breedPics: 'getBreed'
     })
   },
+  mounted () {
+    this.scroll()
+  },
+  created () {
+    this.fetchData()
+  },
+  watch: {
+    '$route': 'fetchData'
+  },
   methods: {
+    fetchData() {
+      this.$nextTick (() => {
+        this.$store.dispatch('getBreedPics', this.$attrs)
+      })
+    },
     scroll () {
       window.onscroll = () => {
         if (window.innerHeight + window.scrollY >= (document.body.offsetHeight)) {
@@ -35,31 +49,12 @@ export default {
         }
       }
     }
-  },
-  mounted () {
-    this.scroll()
-  },
-
-  beforeCreate () {
-    this.$store.dispatch('getAllDoggies')
-    if (!this.$store.state.doggiesList.includes(this.$attrs.breed)) {
-      return router.push('NotFound')
-    }
-  },
-  created () {
-    this.$store.dispatch('getBreedPics', this.$attrs)
-  },
-  beforeUpdate () {
-    if (!this.$store.state.doggiesList.includes(this.$attrs.breed)) {
-      return router.push('NotFound')
-    }
-  },
-  updated () {
-    this.$store.dispatch('getBreedPics', this.$attrs)
   }
 }
 </script>
 
 <style>
-
+  a {
+    color: #1b6342;
+  }
 </style>
