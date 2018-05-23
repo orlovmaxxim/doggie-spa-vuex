@@ -1,14 +1,12 @@
 <template>
-  <div class="container">
-    <ul class="doggie__list grid">
-      <li class="doggie__element" v-for="dogPic in doggiesPics.slice(0, loadLimit)" :key="dogPic.id" v-if="!breed">
-        <doggie :dogPic=dogPic></doggie>
-      </li>
-      <li class="doggie__element" v-for="dogPic in breedPics.slice(0, loadLimit)" :key="dogPic.id" v-if="breed">
-        <doggie :dogPic=dogPic></doggie>
-      </li>
-    </ul>
-  </div>
+  <ul class="doggie__list grid">
+    <li class="doggie__element" v-for="dogPic in doggiesPics.slice(0, loadLimit)" :key="dogPic.id" v-if="!breed">
+      <doggie :dogPic=dogPic></doggie>
+    </li>
+    <li class="doggie__element" v-for="dogPic in breedPics.slice(0, loadLimit)" :key="dogPic.id" v-if="breed">
+      <doggie :dogPic=dogPic></doggie>
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -58,30 +56,9 @@ export default {
 </script>
 
 <style>
-  .grid {
-    column-gap: 30px;
-    column-fill: initial;
-  }
-
-  .doggie__element {
-    margin-bottom: 30px;
-  }
-
-  @media only screen and (min-width: 1024px) {
-    .grid {
-      column-count: 4;
-    }
-  }
-
-  @media only screen and (max-width: 1023px) and (min-width: 768px) {
-    .grid {
-      column-count: 3;
-    }
-  }
-
-  @media only screen and (max-width: 767px) and (min-width: 540px) {
-    .grid {
-      column-count: 2;
-    }
+  .doggie__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
   }
 </style>

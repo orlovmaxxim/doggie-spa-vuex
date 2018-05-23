@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>{{ $attrs.breed.toUpperCase() }}</h1>
-    <p class="disabled">{{ $attrs }}</p>
+    <h1>{{ this.$route.params.breed.toUpperCase() }}</h1>
     <doggies :breed="true" :load-limit=loadLimit></doggies>
   </div>
 </template>
@@ -23,7 +22,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      breedPics: 'getBreed'
+      breedPics: 'getBreed',
+      doggiesList: 'getDoggies'
     })
   },
   mounted () {
@@ -38,7 +38,7 @@ export default {
   methods: {
     fetchData () {
       this.$nextTick(() => {
-        this.$store.dispatch('getBreedPics', this.$attrs)
+        this.$store.dispatch('getBreedPics', this.$route.params.breed)
       })
     },
     scroll () {

@@ -81,7 +81,7 @@ const store = new Vuex.Store({
           commit(types.GET_DOGGIE_PICS, args)
         }))
     },
-    getBreedPics ({ commit, state, dispatch }, { breed }) {
+    getBreedPics ({ commit, state, dispatch }, breed) {
       api.getBreedPics(state, breed, (res) => {
         commit(types.DEL_BREDD_PICS)
         commit(types.GET_BREED_PICS, res)
